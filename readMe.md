@@ -47,7 +47,7 @@ npm run build
 cd backend_lara
 npm install
 composer install
-php aristan migrate:fresh --seed
+php artisan migrate:fresh --seed
 php artisan serve
 
 ```
