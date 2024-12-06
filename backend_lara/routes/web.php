@@ -23,6 +23,7 @@ Route::get("users",function(){
 
 Route::get("recipes",[RecipeController::class,'index'])->name('recipes.index');
 Route::get("recipes/detail/{recipe}",action: [RecipeController::class,'detail'])->name('recipes.detail');
+Route::post('recipes/filter-recipes', [RecipeController::class, 'filterRecipes'])->name(name: 'recipes.filter');
 
 
 Route::get('users/list',[UserController::class,'list'])->name('users.list');

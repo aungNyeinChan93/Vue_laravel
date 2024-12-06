@@ -8,22 +8,26 @@
                 <div class="sm:hidden">
                     <label for="Tab" class="sr-only">Tab</label>
 
-                    <select id="Tab" class="w-full rounded-md border-gray-200">
-                        <option value='all'>All</option>
-                        @foreach ($categories as $key => $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                        @endforeach
-                    </select>
+                    <form id="categoryForm" action="{{ route('recipes.filter') }}" method="post">
+                        @csrf
+                        <select id="categorySelect" name="category" class="w-full rounded-md border-gray-200">
+
+                            <option value="">All</option>
+                            @foreach ($categories as $key => $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </form>
                 </div>
 
                 <div class="hidden sm:block">
                     <nav class="flex gap-6" aria-label="Tabs">
-                        <a href="{{ url("recipes?id=".null."") }}"
+                        <a href="{{ url('recipes?id=' . null . '') }}"
                             class="shrink-0 rounded-lg p-2 text-sm font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-700">
                             All
                         </a>
                         @foreach ($categories as $key => $category)
-                            <a href="{{ url("recipes?id=".$category->id."") }}"
+                            <a href="{{ url('recipes?id=' . $category->id . '') }}"
                                 class="shrink-0 rounded-lg p-2 text-sm font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-700">
                                 {{ $category->name }}
                             </a>
@@ -61,4 +65,13 @@
             {{ $recipes->links() }}
         </div>
     </div>
+
+    <script>
+        document.getElementById('categorySelect').addEventListener('change', function() {
+            document.getElementById('categoryForm').submit();
+        });
+    </script>
+
+
+
 @endsection
