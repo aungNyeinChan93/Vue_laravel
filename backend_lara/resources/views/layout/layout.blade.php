@@ -23,11 +23,11 @@
                 <nav aria-label="Global" class="hidden md:block">
                     <ul class="flex items-center gap-6 text-sm">
                         <li>
-                            <a class="text-gray-500 transition hover:text-gray-500/75" href="#"> About </a>
+                            <a class="text-gray-500 transition hover:text-gray-500/75" href="{{ route('recipes.index') }}"> Recipes </a>
                         </li>
 
                         <li>
-                            <a class="text-gray-500 transition hover:text-gray-500/75" href="#"> Careers </a>
+                            <a class="text-gray-500 transition hover:text-gray-500/75" href="{{ route('users.list') }}"> Users </a>
                         </li>
 
                         <li>

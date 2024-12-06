@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -18,3 +20,9 @@ Route::get("users",function(){
     dd($user);
 });
 
+
+Route::get("recipes",[RecipeController::class,'index'])->name('recipes.index');
+Route::get("recipes/detail/{recipe}",action: [RecipeController::class,'detail'])->name('recipes.detail');
+
+
+Route::get('users/list',[UserController::class,'list'])->name('users.list');

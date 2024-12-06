@@ -4,30 +4,41 @@
 
     <div class="container mx-auto px-10 my-5">
 
-        <div class=" grid grid-cols-4 gap-4">
-            <a href="#" class="block">
-                <img alt=""
-                    src="https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-                    class="h-64 w-full object-cover sm:h-80 lg:h-96 rounded" />
+        <div class=" grid ">
+            <section class="bg-gray-900 text-white">
+                <div class="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center">
+                  <div class="mx-auto max-w-3xl text-center">
+                    <h1
+                      class="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl"
+                    >
+                      Understand User Flow.
 
-                <h3 class="mt-4 text-lg font-bold text-gray-900 sm:text-xl">Lorem, ipsum dolor.</h3>
+                      <span class="sm:block"> Increase Conversion. </span>
+                    </h1>
 
-                <p class="mt-2 max-w-sm text-gray-700">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni reiciendis sequi ipsam incidunt.
-                </p>
-            </a>
+                    <p class="mx-auto mt-4 max-w-xl sm:text-xl/relaxed">
+                      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt illo tenetur fuga ducimus
+                      numquam ea!
+                    </p>
 
-            <a href="#" class="block">
-                <img alt=""
-                    src="https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-                    class="h-64 w-full object-cover sm:h-80 lg:h-96" />
+                    <div class="mt-8 flex flex-wrap justify-center gap-4">
+                      <a
+                        class="block w-full rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
+                        href="#"
+                      >
+                        Get Started
+                      </a>
 
-                <h3 class="mt-4 text-lg font-bold text-gray-900 sm:text-xl">Lorem, ipsum dolor.</h3>
-
-                <p class="mt-2 max-w-sm text-gray-700">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni reiciendis sequi ipsam incidunt.
-                </p>
-            </a>
+                      <a
+                        class="block w-full rounded border border-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto"
+                        href="#"
+                      >
+                        Learn More
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </section>
         </div>
     </div>
 @endsection

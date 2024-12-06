@@ -9,4 +9,11 @@ class Recipe extends Model
 {
     /** @use HasFactory<\Database\Factories\RecipeFactory> */
     use HasFactory;
+
+    protected $guarded = [];
+
+    public function category(){
+        return $this->belongsTo(Category::class,'category_id');
+    }
+
 }
