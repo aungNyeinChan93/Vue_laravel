@@ -11,6 +11,14 @@ Route::get('/', function () {
     return view('user.home');
 })->name('home');
 
+Route::get("test/image",function(){
+    return view('tests.image');
+});
+Route::get("test/image/download/{url}",function($url){
+    return response()->download('storage/recipes/'.$url);
+})->name('download');
+
+
 
 Route::get("test/{test?}",function($test = 'test'){
     dd('test',$test);

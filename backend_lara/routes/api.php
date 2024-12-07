@@ -26,3 +26,6 @@ Route::patch('recipes/{recipe}',[RecipeController::class,'update']);
 
 // get categories
 Route::get('categories',[CategoryController::class,'index']);
+
+// uploade photo
+Route::post('recipes/upload',[RecipeController::class,'upload']);

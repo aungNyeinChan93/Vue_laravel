@@ -143,7 +143,12 @@ class RecipeController extends Controller
         }
     }
 
-    //
+    /**
+     * Summary of update
+     * path - /api/recipes/ (title,description,photo,category_id)
+     * @param mixed $id
+     * @return mixed|\Illuminate\Http\JsonResponse
+     */
     public function update($id)
     {
         try {
@@ -184,10 +189,42 @@ class RecipeController extends Controller
                 'status' => 201,
                 'recipe' => $recipe
             ], 201);
-
         } catch (\Throwable $th) {
             return response()->json([
                 "message" => $th->getMessage(),
+                'status' => 500
+            ], 500);
+        }
+    }
+
+    public function upload()
+    {
+        try {
+            $validator = Validator::make(request()->all(), [
+                'photo' => ['required', 'file', 'image'],
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => collect($validator->errors())->flatMap(function ($e, $field) {
+                        return [$field = $e[0]];
+                    }),
+                    'status' => 400
+                ], 400);
+            }
+
+            // $fileName = request()->file('photo')->getClientOriginalName();
+            // request()->file('photo')->move(public_path('/recipes/'),$fileName);
+
+            $path = request()->photo->store('/recipes','public');
+            return response()->json([
+                'path' => $path,
+                'status'=>200
+            ]);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => $th->getMessage(),
                 'status' => 500
             ], 500);
         }
