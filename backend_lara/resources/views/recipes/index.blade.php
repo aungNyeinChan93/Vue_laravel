@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="flex justify-between flex-col items-center">
+
         <div class=" my-3">
             {{-- category list --}}
             <div>
@@ -37,6 +38,7 @@
             </div>
             {{-- category list end --}}
         </div>
+
         <div class="container  grid md:grid-cols-2 lg:grid-cols-4 mx-10 gap-5">
             @foreach ($recipes as $key => $recipe)
                 <a href="{{ route('recipes.detail', $recipe->id) }}" class="group relative block bg-black">
