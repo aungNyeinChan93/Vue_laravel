@@ -18,8 +18,6 @@ Route::get("test/image/download/{url}",function($url){
     return response()->download('storage/recipes/'.$url);
 })->name('download');
 
-
-
 Route::get("test/{test?}",function($test = 'test'){
     dd('test',$test);
 });

@@ -62,6 +62,14 @@ npm run dev
 
 ```
 
+### Storage Link (filesystem disk = public  / ~ .env ~ FILESYSTEM_DISK=public ) 
+
+```
+cd backend_lara
+php artisan storage:link
+
+```
+
 
 
 

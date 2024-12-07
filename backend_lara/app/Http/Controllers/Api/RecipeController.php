@@ -7,6 +7,7 @@ use App\Models\Recipe;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use Faker\Provider\Image;
 use Illuminate\Support\Facades\Validator;
 
 class RecipeController extends Controller
@@ -197,6 +198,12 @@ class RecipeController extends Controller
         }
     }
 
+    /**
+     * Summary of upload
+     * post - /recipes/upload
+     * @param  mixed $photo (file/image)
+     * @return mixed|\Illuminate\Http\JsonResponse
+     */
     public function upload()
     {
         try {
@@ -217,10 +224,11 @@ class RecipeController extends Controller
             // request()->file('photo')->move(public_path('/recipes/'),$fileName);
 
             $path = request()->photo->store('/recipes','public');
+
             return response()->json([
-                'path' => $path,
+                'path' => "/storage/".$path,
                 'status'=>200
-            ]);
+            ],200);
 
         } catch (\Throwable $th) {
             return response()->json([

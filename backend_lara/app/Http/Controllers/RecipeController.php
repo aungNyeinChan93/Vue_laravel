@@ -15,7 +15,7 @@ class RecipeController extends Controller
             ->when($request->id, function ($query) use ($request) {
                 $query->where('category_id', '=', $request->id);
             })
-            ->paginate(10);
+            ->paginate(12);
         $categories = Category::query()->get();
         return view("recipes.index", compact('recipes', 'categories'));
     }
@@ -26,7 +26,7 @@ class RecipeController extends Controller
         return view('recipes.detail', compact('recipe'));
     }
 
-    // filter recipes by category 
+    // filter recipes by category
     public function filterRecipes(Request $request)
     {
         // $category_id = $request->input('category');
