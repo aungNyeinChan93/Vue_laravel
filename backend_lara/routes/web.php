@@ -9,7 +9,7 @@ use App\Http\Controllers\RecipeController;
 Route::redirect('home','/',302);
 Route::get('/', function () {
     return view('user.home');
-});
+})->name('home');
 
 
 Route::get("test/{test?}",function($test = 'test'){
