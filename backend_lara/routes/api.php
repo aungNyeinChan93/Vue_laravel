@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\RecipeController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,3 +30,7 @@ Route::get('categories',[CategoryController::class,'index']);
 
 // uploade photo
 Route::post('recipes/upload',[RecipeController::class,'upload']);
+
+
+// users
+Route::get("users",[UserController::class,'index']);

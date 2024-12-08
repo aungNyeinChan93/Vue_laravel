@@ -29,7 +29,7 @@
               </li>
 
               <li>
-                <a class="text-gray-500 transition hover:text-gray-500/75" href="#"> Services </a>
+                <router-link class="text-gray-500 transition hover:text-gray-500/75" to="/users">Users</router-link>
               </li>
 
               <li>

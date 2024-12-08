@@ -44,7 +44,9 @@
 
 <script setup>
 
-defineProps({
+
+
+defineProps({   
     category:{
         type:Object,
     }
