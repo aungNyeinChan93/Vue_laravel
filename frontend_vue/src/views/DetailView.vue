@@ -43,6 +43,7 @@ const props = defineProps({
         type: Number
     }
 });
+console.log(props.id);
 
 const recipe = ref({});
 

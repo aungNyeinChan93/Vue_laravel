@@ -49,7 +49,7 @@ class RecipeController extends Controller
     {
         try {
 
-            $recipe = Recipe::find($id)
+            $recipe = Recipe::where("id",$id)
                 ->with('category:id,name')
                 ->first();
 

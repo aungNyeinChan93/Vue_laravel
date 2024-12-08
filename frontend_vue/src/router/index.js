@@ -28,7 +28,7 @@ const router = createRouter({
       path: '/recipes/:id',
       name: 'recipeDetail',
       component: () => import('@/views/DetailView.vue'),      
-      props:true
+      props:route => ({ id: Number(route.params.id) })
     },
    
   ],
