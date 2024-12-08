@@ -11,7 +11,7 @@
             </thead>
 
             <tbody class="divide-y divide-gray-200">
-                <TableRole  v-for="user in users" :key="user.id" :user="user"/>
+                <TableRole  v-for="user in users" :key="user.id" :user="user" />
             </tbody>
         </table>
     </div>

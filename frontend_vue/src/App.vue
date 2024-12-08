@@ -13,11 +13,11 @@
           </a>
         </div>
 
-        <div class="hidden md:block">
+        <div class="hidden md:block"> 
           <nav aria-label="Global">
             <ul class="flex items-center gap-6 text-sm">
               <li>
-                <router-link class="text-gray-500 transition hover:text-gray-500/75" to="/home">Home</router-link>
+                <router-link class="text-gray-500 transition hover:text-gray-500/75" to="/">Home</router-link>
               </li>
 
               <li>
@@ -30,10 +30,6 @@
 
               <li>
                 <router-link class="text-gray-500 transition hover:text-gray-500/75" to="/users">Users</router-link>
-              </li>
-
-              <li>
-                <a class="text-gray-500 transition hover:text-gray-500/75" href="#"> Projects </a>
               </li>
 
               <li>
