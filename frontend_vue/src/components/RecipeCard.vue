@@ -9,12 +9,13 @@
                 {{ recipe.title }}
             </h3>
 
-            <p class="mt-1 text-sm text-gray-700">{{ recipe.id }}</p>
+            <p class="mt-1 text-sm text-gray-700">{{ recipe.category.name }}</p>
         </div>
     </router-link>
 </template>
 
 <script>
+
 export default {
     props:['id','recipe'],
     setup(props) {

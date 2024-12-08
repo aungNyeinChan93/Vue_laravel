@@ -26,6 +26,8 @@ class RecipeController extends Controller
             return response()->json([
                 'message' => 'success',
                 'recipes' => Recipe::filter(request(['category']))
+                    ->with("category:id,name")
+                    ->orderBy("created_at", 'desc')
                     ->paginate()
             ], 200, ['testheader' => 'test']);
         } catch (Exception $e) {
@@ -47,7 +49,9 @@ class RecipeController extends Controller
     {
         try {
 
-            $recipe = Recipe::find($id);
+            $recipe = Recipe::find($id)
+                ->with('category:id,name')
+                ->first();
 
             if (!$recipe) {
                 return response()->json([
@@ -223,13 +227,12 @@ class RecipeController extends Controller
             // $fileName = request()->file('photo')->getClientOriginalName();
             // request()->file('photo')->move(public_path('/recipes/'),$fileName);
 
-            $path = request()->photo->store('/recipes','public');
+            $path = request()->photo->store('/recipes', 'public');
 
             return response()->json([
-                'path' => "/storage/".$path,
-                'status'=>200
-            ],200);
-
+                'path' => "/storage/" . $path,
+                'status' => 200
+            ], 200);
         } catch (\Throwable $th) {
             return response()->json([
                 'message' => $th->getMessage(),
