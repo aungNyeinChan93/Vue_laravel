@@ -76,7 +76,7 @@
         </div>
     </header>
 
-    <main class="main w-full h-screen">
+    <main class="main ">
         @yield('content')
     </main>
 </body>

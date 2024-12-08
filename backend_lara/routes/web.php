@@ -41,10 +41,12 @@ Route::get("fetch/products/detail/{product}",function($product){
 })->name(name: 'fetch.productDetail');
 
 
-
+// recipes
 Route::get("recipes",[RecipeController::class,'index'])->name('recipes.index');
 Route::get("recipes/detail/{recipe}",action: [RecipeController::class,'detail'])->name('recipes.detail');
 Route::post('recipes/filter-recipes', [RecipeController::class, 'filterRecipes'])->name(name: 'recipes.filter');
+Route::get("recipes/create",action: [RecipeController::class,'createPage'])->name('recipes.createPage');
+Route::post('recipes/create',[RecipeController::class,'store'])->name('recipes.store');
 
-
+// users
 Route::get('users/list',[UserController::class,'list'])->name('users.list');

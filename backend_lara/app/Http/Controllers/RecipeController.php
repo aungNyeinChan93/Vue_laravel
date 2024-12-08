@@ -15,6 +15,7 @@ class RecipeController extends Controller
             ->when($request->id, function ($query) use ($request) {
                 $query->where('category_id', '=', $request->id);
             })
+            ->orderBy('created_at', 'desc')
             ->paginate(12);
         $categories = Category::query()->get();
         return view("recipes.index", compact('recipes', 'categories'));
@@ -45,5 +46,33 @@ class RecipeController extends Controller
         $categories = Category::all();
 
         return view('recipes.index', compact('recipes', 'categories'));
+    }
+
+    // recipe createPage
+    public function createPage()
+    {
+        $categories = Category::query()->get();
+        return view('recipes.create', compact('categories'));
+    }
+
+    // recipe store
+    public function store(Request $request)
+    {
+
+        $fields = $request->validate([
+            'title' => "required",
+            'description' => "required",
+            'category_id' => "required",
+            'photo' => "required",
+        ]);
+
+        if ($request->file('photo')) {
+            $path = request()->file('photo')->store('recipes', 'public');
+            $fields['photo'] = $path;
+        }
+
+        $recipe = Recipe::create($fields);
+
+        return to_route(route: 'recipes.index')->with('create', value: $recipe['title'] . " has been created");
     }
 }
