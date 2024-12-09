@@ -40,7 +40,6 @@ defineProps({
 const recipeStore = useRecipesStore();
 
 const filterCategory = (category)=>{
-    // console.log(category);
     recipeStore.recipesByCategory(category);
 }
 

@@ -17,16 +17,15 @@ export const useRecipesStore = defineStore('recipes', () => {
 
     const recipesByCategory = async (category) => {
         try {
-            if (category === "all") {
-                const res = await axios.get('/api/recipes');
-                recipes.value = res.data.recipes
-            } else {
-                const res = await axios.get(`/api/recipes?category=${category}`);
-                recipes.value = res.data.recipes
-            }
+            // if (category === "all") {
+            //     const res = await axios.get('/api/recipes');
+            //     recipes.value = res.data.recipes
+            // } else {
+            // }
+            const res = await axios.get(`/api/recipes?category=${category}`);
+            recipes.value = res.data.recipes
         } catch (error) {
             console.log(e);
-
         }
     }
 

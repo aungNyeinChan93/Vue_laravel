@@ -35,9 +35,6 @@ onMounted(()=>{
   recipesStore.recipesDataFetch();
   // console.log(recipesStore.recipes);
   categoriesStore.categoriesDataFetch();
-
-
-
 });
 
 </script>
