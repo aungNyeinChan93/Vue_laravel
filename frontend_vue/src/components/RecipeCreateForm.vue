@@ -1,95 +1,101 @@
 <template>
-    <section class="bg-gray-100">
-        <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
-                <div class="lg:col-span-2 lg:py-12">
-                    <p class="max-w-xl text-lg">
-                        Recipe Create Form
-                    </p>
+    <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-lg text-center">
+            <h1 class="text-2xl font-bold sm:text-3xl">Get started Taste!</h1>
 
-                    <div class="mt-8">
-                        <a href="#" class="text-2xl font-bold text-pink-600"> 0151 475 4450 </a>
+            <p class="mt-4 text-gray-500">
+                Create Recipes
+            </p>
+        </div>
 
-                        <address class="mt-2 not-italic">282 Kevin Brook, Imogeneborough, CA 58517</address>
+        <form @submit.prevent="createRecipe" enctype="multipart/form-data" class="mx-auto mb-0 mt-8 max-w-md space-y-4">
 
-                        <button class="px-3 py-1 mt-4 bg-red-400 rounded ">
-                            <router-link
-                                :to="{ name: 'home' }">Back
-                            </router-link>
-                        </button>
+            <div>
+                <label for="title" class="sr-only">title</label>
+                <div class="relative  mt-3">
+                    <input type="title" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                        placeholder="Enter title" v-model="form.title" value="" />
+                </div>
+                <div>
+                    <label for="description" class="sr-only">description</label>
+                    <div class="relative mt-3">
+                        <textarea v-model="form.description" rows="8"
+                            class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                            placeholder="Enter description"></textarea>
                     </div>
                 </div>
 
-                <div class="rounded-lg bg-white p-8 shadow-lg lg:col-span-3 lg:p-12">
-                    <form action="#" class="space-y-4">
-                        <div>
-                            <label class="sr-only" for="name">Name</label>
-                            <input class="w-full rounded-lg border-gray-200 p-3 text-sm" placeholder="Name" type="text"
-                                id="name" />
-                        </div>
+                <div>
+                    <select v-model="form.category_id"
+                        class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm mt-3">
+                        <option value="choose" selected>Choose Category</option>
+                        <option v-for="category in categoriesStore.categories" :key="category.id" :value="category.id">
+                            {{ category.name }}</option>
+                    </select>
+                </div>
 
-                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                            <div>
-                                <label class="sr-only" for="email">Email</label>
-                                <input class="w-full rounded-lg border-gray-200 p-3 text-sm" placeholder="Email address"
-                                    type="email" id="email" />
-                            </div>
+                <div>
+                    <input type="file" name="photo" v-on:change="upload"
+                        class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm mt-3">
+                </div>
 
-                            <div>
-                                <label class="sr-only" for="phone">Phone</label>
-                                <input class="w-full rounded-lg border-gray-200 p-3 text-sm" placeholder="Phone Number"
-                                    type="tel" id="phone" />
-                            </div>
-                        </div>
+                <div class="flex items-center justify-between">
+                    <p class="text-sm text-gray-500">
+                        No account?
+                        <a class="underline" href="#">Sign up</a>
+                    </p>
 
-                        <div class="grid grid-cols-1 gap-4 text-center sm:grid-cols-3">
-                            <div>
-                                <label for="Option1"
-                                    class="block w-full cursor-pointer rounded-lg border border-gray-200 p-3 text-gray-600 hover:border-black has-[:checked]:border-black has-[:checked]:bg-black has-[:checked]:text-white"
-                                    tabindex="0">
-                                    <input class="sr-only" id="Option1" type="radio" tabindex="-1" name="option" />
-
-                                    <span class="text-sm"> Option 1 </span>
-                                </label>
-                            </div>
-
-                            <div>
-                                <label for="Option2"
-                                    class="block w-full cursor-pointer rounded-lg border border-gray-200 p-3 text-gray-600 hover:border-black has-[:checked]:border-black has-[:checked]:bg-black has-[:checked]:text-white"
-                                    tabindex="0">
-                                    <input class="sr-only" id="Option2" type="radio" tabindex="-1" name="option" />
-
-                                    <span class="text-sm"> Option 2 </span>
-                                </label>
-                            </div>
-
-                            <div>
-                                <label for="Option3"
-                                    class="block w-full cursor-pointer rounded-lg border border-gray-200 p-3 text-gray-600 hover:border-black has-[:checked]:border-black has-[:checked]:bg-black has-[:checked]:text-white"
-                                    tabindex="0">
-                                    <input class="sr-only" id="Option3" type="radio" tabindex="-1" name="option" />
-
-                                    <span class="text-sm"> Option 3 </span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <div>
-                            <label class="sr-only" for="message">Message</label>
-
-                            <textarea class="w-full rounded-lg border-gray-200 p-3 text-sm" placeholder="Message"
-                                rows="8" id="message"></textarea>
-                        </div>
-
-                        <div class="mt-4">
-                            <button type="submit"
-                                class="inline-block w-full rounded-lg bg-black px-5 py-3 font-medium text-white sm:w-auto">
-                                Send Enquiry
-                            </button>
-                        </div>
-                    </form>
+                    <button type="submit"
+                        class="inline-block rounded-lg bg-green-500 px-5 py-3 text-sm font-medium text-white my-4">
+                        Create
+                    </button>
                 </div>
             </div>
-        </div>
-    </section>
+        </form>
+    </div>
 </template>
+
+<script setup>
+import { onMounted, reactive } from 'vue';
+import { useCategoryStore } from '@/stores/useCategoryStore';
+import axios from 'axios';
+import { useRouter } from 'vue-router';
+
+const categoriesStore = useCategoryStore();
+const router = useRouter();
+
+const form = reactive({
+    title: null,
+    description: null,
+    category_id: 'choose',
+    photo: null,
+});
+
+const upload = (e) => {
+    let file = e.target.files[0];
+    if (file) {
+        form.photo = file;
+    }
+}
+
+const createRecipe = async () => {
+
+    const formData = new FormData();
+    formData.append('photo', form.photo);
+    formData.append('name', 'Recipe Name');
+    try {
+        const res = await axios.post('/api/recipes/upload', formData);
+        form.photo= res.data.path
+
+        const recipe = await axios.post('/api/recipes',form);
+        router.push({name:'home'})
+        
+    } catch (error) {
+        console.error('Error uploading recipe:', error);
+    }
+}
+
+onMounted(() => {
+    categoriesStore.categoriesDataFetch();
+});
+</script>

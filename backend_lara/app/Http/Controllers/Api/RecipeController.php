@@ -212,7 +212,7 @@ class RecipeController extends Controller
     {
         try {
             $validator = Validator::make(request()->all(), [
-                'photo' => ['required', 'file', 'image'],
+                'photo' => ['required'],
             ]);
 
             if ($validator->fails()) {
