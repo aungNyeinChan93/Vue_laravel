@@ -68,7 +68,7 @@ class RecipeController extends Controller
 
         if ($request->file('photo')) {
             $path = request()->file('photo')->store('recipes', 'public');
-            $fields['photo'] = $path;
+            $fields['photo'] = 'storage/'.$path;
         }
 
         $recipe = Recipe::create($fields);
