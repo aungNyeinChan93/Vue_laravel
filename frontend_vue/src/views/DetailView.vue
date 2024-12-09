@@ -26,7 +26,7 @@
                 </div>
 
                 <div>
-                    <img :src="'http://localhost:8000'+recipe.photo" class="rounded" alt="" />
+                    <img :src="'http://localhost:8000/'+recipe.photo" class="rounded" alt="" />
                 </div>
             </div>
         </div>

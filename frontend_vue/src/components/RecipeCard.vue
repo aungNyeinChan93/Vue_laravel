@@ -1,6 +1,6 @@
 <template>
     <router-link :to="{ name: 'recipeDetail',params:{id:recipe.id}  }" class="group block">
-        <img v-if="recipe.photo" :src="'http://localhost:8000'+recipe.photo"
+        <img :src="'http://localhost:8000/'+recipe.photo"
             alt="" class="aspect-square w-full rounded object-cover" />
 
         <div class="mt-3">

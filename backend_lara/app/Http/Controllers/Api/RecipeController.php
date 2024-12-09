@@ -230,7 +230,7 @@ class RecipeController extends Controller
             $path = request()->photo->store('/recipes', 'public');
 
             return response()->json([
-                'path' => "/storage/" . $path,
+                'path' => "storage/" . $path,
                 'status' => 200
             ], 200);
         } catch (\Throwable $th) {

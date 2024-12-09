@@ -86,7 +86,8 @@ const createRecipe = async () => {
     try {
         const res = await axios.post('/api/recipes/upload', formData);
         form.photo = res.data.path
-
+        // console.log(form.photo);
+        
         if (form.photo) {
             const recipe = await axios.post('/api/recipes', form);
             router.push({ name: 'home' })
