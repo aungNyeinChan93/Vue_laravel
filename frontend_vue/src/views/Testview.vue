@@ -16,6 +16,8 @@ const testStore = useTestStore();
 
 onMounted(()=>{
     testStore.categoriesDataFetch();
+    console.log(testStore.categories);
+    
 });
 
 </script>

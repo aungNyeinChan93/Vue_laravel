@@ -12,9 +12,9 @@
       </a>
     </section>
     <!-- category list section -->
-    <section>
-      categories list
-    </section>
+    <div class="flex justify-center items-center my-6">
+      <CategoriesTab :categories="categoriesStore.categories" />
+    </div>
     <!-- recipes card section -->
     <section class="my-4 grid lg:grid-cols-4 gap-4">
       <RecipeCard v-for="recipe in recipesStore.recipes.data" :key="recipe.id" :recipe="recipe" :id="recipe.id" />
@@ -26,12 +26,18 @@
 import RecipeCard from '@/components/RecipeCard.vue';
 import { useRecipesStore } from '@/stores/useRecipesStore';
 import { onMounted } from 'vue';
-
-
+import CategoriesTab from '@/components/CategoriesTab.vue';
+import { useCategoryStore } from '@/stores/useCategoryStore';
 const recipesStore = useRecipesStore();
+const categoriesStore = useCategoryStore();
 
 onMounted(()=>{
   recipesStore.recipesDataFetch();
+  // console.log(recipesStore.recipes);
+  categoriesStore.categoriesDataFetch();
+
+
+
 });
 
 </script>
