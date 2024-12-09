@@ -35,7 +35,7 @@
                 </div>
 
                 <div>
-                    <input type="file" name="photo" v-on:change="upload"
+                    <input type="file" accept="image/png , image/jpg , image/jpeg" name="photo" v-on:change="upload"
                         class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm mt-3">
                 </div>
 
@@ -85,11 +85,13 @@ const createRecipe = async () => {
     formData.append('name', 'Recipe Name');
     try {
         const res = await axios.post('/api/recipes/upload', formData);
-        form.photo= res.data.path
+        form.photo = res.data.path
 
-        const recipe = await axios.post('/api/recipes',form);
-        router.push({name:'home'})
-        
+        if (form.photo) {
+            const recipe = await axios.post('/api/recipes', form);
+            router.push({ name: 'home' })
+        }
+
     } catch (error) {
         console.error('Error uploading recipe:', error);
     }
