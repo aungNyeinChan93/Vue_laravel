@@ -22,6 +22,10 @@
                         <button class="px-4 py-1 mt-4 rounded-md bg-green-500 hover:bg-green-300 ">
                             <router-link :to="{ name: 'home' }">Back</router-link>
                         </button>
+
+                        <button class="ms-3 px-4 py-1 mt-4 rounded-md bg-yellow-500 hover:bg-green-300 ">
+                            <router-link :to="{ name: 'editRecipes',params:{id:recipe.id} }">Edit</router-link>
+                        </button>
                     </div>
                 </div>
 
@@ -50,11 +54,13 @@ const recipe = ref({});
 const recipeData = async () => {
     const res = await axios.get('/api/recipes/' + props.id)
     recipe.value = res.data.recipe
-    console.log(recipe.value);   
+    // console.log(recipe.value);   
 }
 
 onMounted(() => {
     recipeData();
+    console.log(props.id);
+    
 });
 
 </script>

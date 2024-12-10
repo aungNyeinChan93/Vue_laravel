@@ -6,6 +6,9 @@ import { ref } from "vue";
 export const useRecipesStore = defineStore('recipes', () => {
     const recipes = ref([]);
 
+    const recipe = ref({});
+
+    // all recipes
     const recipesDataFetch = async () => {
         try {
             const res = await axios.get('/api/recipes');
@@ -15,6 +18,7 @@ export const useRecipesStore = defineStore('recipes', () => {
         }
     }
 
+    // recipes by category
     const recipesByCategory = async (category) => {
         try {
             // if (category === "all") {
@@ -29,5 +33,11 @@ export const useRecipesStore = defineStore('recipes', () => {
         }
     }
 
-    return { recipes, recipesDataFetch, recipesByCategory }
+    // single recipe
+    const recipeData =async (id)=>{
+        const {data} = await axios.get('api/recipes/'+id);
+        recipe.value=data.recipe
+    }
+
+    return { recipe,recipes, recipesDataFetch, recipesByCategory ,recipeData}
 });

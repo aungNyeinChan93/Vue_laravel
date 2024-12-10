@@ -13,6 +13,17 @@ const router = createRouter({
       path: '/about',
       name: 'about',
       component: () => import('../views/AboutView.vue'),
+      props: route => ({ id: Number(route.params.id) }),
+
+      children:[
+        {
+          path:'/edit/:id',
+          name:'editRecipes',
+          component:()=>import("@/views/AboutView.vue"),
+          props: route => ({ id: Number(route.params.id) }),
+        }
+      ]
+
     },
     {
       path: '/test',
@@ -28,7 +39,8 @@ const router = createRouter({
       path: '/recipes/:id',
       name: 'recipeDetail',
       component: () => import('@/views/DetailView.vue'),      
-      props:route => ({ id: Number(route.params.id) })
+      props:route => ({ id: Number(route.params.id) }),
+
     },
    
   ],

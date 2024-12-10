@@ -13,7 +13,10 @@
             <div>
                 <label for="title" class="sr-only">title</label>
                 <div class="relative  mt-3">
-                    <input type="title" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                    {{ recipe }}
+                    <input v-show="recipe" type="title" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                        placeholder="Enter title" v-model="form.title"  />
+                    <input v-show="!recipe" type="title" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                         placeholder="Enter title" v-model="form.title" value="" />
                 </div>
                 <div>
@@ -49,6 +52,8 @@
                         class="inline-block rounded-lg bg-green-500 px-5 py-3 text-sm font-medium text-white my-4">
                         Create
                     </button>
+
+               
                 </div>
             </div>
         </form>
@@ -60,6 +65,14 @@ import { onMounted, reactive } from 'vue';
 import { useCategoryStore } from '@/stores/useCategoryStore';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
+import { defineProps } from 'vue';
+
+
+const props = defineProps({
+    recipe:{
+        type:Object
+    }
+});
 
 const categoriesStore = useCategoryStore();
 const router = useRouter();
@@ -100,5 +113,7 @@ const createRecipe = async () => {
 
 onMounted(() => {
     categoriesStore.categoriesDataFetch();
+    console.log(props.recipe.title);
+    
 });
 </script>
