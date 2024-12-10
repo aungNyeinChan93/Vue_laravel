@@ -9,14 +9,10 @@
         </div>
 
         <form @submit.prevent="createRecipe" enctype="multipart/form-data" class="mx-auto mb-0 mt-8 max-w-md space-y-4">
-
             <div>
                 <label for="title" class="sr-only">title</label>
                 <div class="relative  mt-3">
-                    {{ recipe }}
-                    <input v-show="recipe" type="title" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-                        placeholder="Enter title" v-model="form.title"  />
-                    <input v-show="!recipe" type="title" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                    <input type="title" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                         placeholder="Enter title" v-model="form.title" value="" />
                 </div>
                 <div>
@@ -38,8 +34,9 @@
                 </div>
 
                 <div>
+                    <img v-if="recipe.photo" :src="'http://localhost:8000/'+recipe.photo" alt="rec" class="w-50 rounded mx-auto my-3" >
                     <input type="file" accept="image/png , image/jpg , image/jpeg" name="photo" v-on:change="upload"
-                        class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm mt-3">
+                        class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm mt-3" >
                 </div>
 
                 <div class="flex items-center justify-between">
@@ -48,12 +45,21 @@
                         <a class="underline" href="#">Sign up</a>
                     </p>
 
-                    <button type="submit"
+                    <button v-if="!recipe.id" type="submit"
                         class="inline-block rounded-lg bg-green-500 px-5 py-3 text-sm font-medium text-white my-4">
                         Create
                     </button>
 
-               
+                    <button v-else type="submit"
+                        class="inline-block rounded-lg bg-green-500 px-5 py-3 text-sm font-medium text-white my-4">
+                        Update
+                    </button>
+                </div>
+                <div class="w-full">
+                    <router-link to="/" 
+                        class="text-green-500 py-3 text-xl">
+                        Back
+                    </router-link>
                 </div>
             </div>
         </form>
@@ -78,9 +84,9 @@ const categoriesStore = useCategoryStore();
 const router = useRouter();
 
 const form = reactive({
-    title: null,
-    description: null,
-    category_id: 'choose',
+    title: props.recipe.title,
+    description: props.recipe.description,
+    category_id:props.recipe?props.recipe.category_id:'choose',
     photo: null,
 });
 
@@ -111,9 +117,9 @@ const createRecipe = async () => {
     }
 }
 
+
 onMounted(() => {
     categoriesStore.categoriesDataFetch();
-    console.log(props.recipe.title);
-    
+    console.log(props.recipe);
 });
 </script>

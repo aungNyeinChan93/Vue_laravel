@@ -14,13 +14,12 @@ const router = createRouter({
       name: 'about',
       component: () => import('../views/AboutView.vue'),
       props: route => ({ id: Number(route.params.id) }),
-
       children:[
         {
           path:'/edit/:id',
           name:'editRecipes',
           component:()=>import("@/views/AboutView.vue"),
-          props: route => ({ id: Number(route.params.id) }),
+          props:true
         }
       ]
 

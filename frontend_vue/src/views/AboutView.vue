@@ -17,9 +17,9 @@ const props = defineProps({ id: { type: Number, required: true, }, }); //that is
 
 onMounted(() => {
   // console.log(route.params.id);
-  if (route.params.id) {
-    recipeData(route.params.id);
-  }
+  recipeData(route.params.id);
+  // if (route.params.id) {
+  // }
 });
 
 </script>
