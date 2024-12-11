@@ -23,8 +23,12 @@
                             <router-link :to="{ name: 'home' }">Back</router-link>
                         </button>
 
-                        <button class="ms-3 px-4 py-1 mt-4 rounded-md bg-yellow-500 hover:bg-green-300 ">
+                        <button class="ms-3 px-4 py-1 mt-4 rounded-md bg-yellow-500 hover:bg-yellow-300 ">
                             <router-link :to="{ name: 'editRecipes',params:{id:recipe.id} }">Edit</router-link>
+                        </button>
+
+                        <button @click="deleteRecipe(recipe.id)" class="ms-3 px-4 py-1 mt-4 rounded-md bg-red-500 hover:bg-red-300 ">
+                            Delete  
                         </button>
                     </div>
                 </div>
@@ -41,6 +45,7 @@
 <script setup>
 import axios from 'axios';
 import { defineProps, onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 const props = defineProps({
     id: {
@@ -49,12 +54,19 @@ const props = defineProps({
 });
 console.log(props.id);
 
+const router = useRouter();
 const recipe = ref({});
 
 const recipeData = async () => {
     const res = await axios.get('/api/recipes/' + props.id)
     recipe.value = res.data.recipe
     // console.log(recipe.value);   
+}
+
+const deleteRecipe= async(id)=>{
+    // console.log(id); 
+    await axios.delete(`/api/recipes/${id}`); // need delete photo
+    router.push({name:'home'});
 }
 
 onMounted(() => {

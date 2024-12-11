@@ -58,7 +58,6 @@
                 </div>
                 <div class="w-full">
                     <router-link to="/" class="text-green-500 py-3 text-xl">
-
                         Back
                     </router-link>
                 </div>
@@ -93,6 +92,7 @@ const form = reactive({
     photo: null,
 });
 
+
 const upload = (e) => {
     let file = e.target.files[0];
     if (file) {
@@ -104,9 +104,10 @@ const createRecipe = async () => {
 
     const formData = new FormData();
     formData.append('photo', form.photo);
-    formData.append('name', 'Recipe Name');
+    // formData.append('name', 'Recipe Name');
 
     try {
+
         if (route.params.id) {
             // console.log('have', route.params.id, form);
             const res = await axios.post('/api/recipes/upload', formData); //file upload
