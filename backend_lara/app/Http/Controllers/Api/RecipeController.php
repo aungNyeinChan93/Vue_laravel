@@ -160,7 +160,7 @@ class RecipeController extends Controller
 
             $recipe = Recipe::find($id);
 
-            if (!$recipe) {
+            if (!$recipe) { 
                 return response()->json([
                     'message' => 'recipe not found ! ',
                     'status' => 404

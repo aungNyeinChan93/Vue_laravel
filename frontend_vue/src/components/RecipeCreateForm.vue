@@ -34,9 +34,10 @@
                 </div>
 
                 <div>
-                    <img v-if="recipe.photo" :src="'http://localhost:8000/'+recipe.photo" alt="rec" class="w-50 rounded mx-auto my-3" >
-                    <input type="file" accept="image/png , image/jpg , image/jpeg" name="photo" v-on:change="upload"
-                        class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm mt-3" >
+                    <img v-if="recipe.photo" :src="'http://localhost:8000/' + recipe.photo" alt="rec"
+                        class="w-50 rounded mx-auto my-3">
+                    <input type="file" accept="image/png , image/jpg , image/jpeg" name="photo" @change="upload"
+                        class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm mt-3">
                 </div>
 
                 <div class="flex items-center justify-between">
@@ -56,8 +57,8 @@
                     </button>
                 </div>
                 <div class="w-full">
-                    <router-link to="/" 
-                        class="text-green-500 py-3 text-xl">
+                    <router-link to="/" class="text-green-500 py-3 text-xl">
+
                         Back
                     </router-link>
                 </div>
@@ -70,23 +71,25 @@
 import { onMounted, reactive } from 'vue';
 import { useCategoryStore } from '@/stores/useCategoryStore';
 import axios from 'axios';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { defineProps } from 'vue';
 
 
+
 const props = defineProps({
-    recipe:{
-        type:Object
+    recipe: {
+        type: Object
     }
 });
 
 const categoriesStore = useCategoryStore();
 const router = useRouter();
+const route = useRoute();
 
 const form = reactive({
     title: props.recipe.title,
     description: props.recipe.description,
-    category_id:props.recipe?props.recipe.category_id:'choose',
+    category_id: props.recipe.id ? props.recipe.category_id : 'choose',
     photo: null,
 });
 
@@ -102,16 +105,27 @@ const createRecipe = async () => {
     const formData = new FormData();
     formData.append('photo', form.photo);
     formData.append('name', 'Recipe Name');
-    try {
-        const res = await axios.post('/api/recipes/upload', formData);
-        form.photo = res.data.path
-        // console.log(form.photo);
-        
-        if (form.photo) {
-            const recipe = await axios.post('/api/recipes', form);
-            router.push({ name: 'home' })
-        }
 
+    try {
+        if (route.params.id) {
+            // console.log('have', route.params.id, form);
+            const res = await axios.post('/api/recipes/upload', formData); //file upload
+            form.photo = res.data.path
+
+            if (form.photo) {
+                const { data } = await axios.put(`/api/recipes/${route.params.id}`, form);
+                router.push({ name: 'home' })
+            }
+
+        } else {
+            const res = await axios.post('/api/recipes/upload', formData); //file upload
+            form.photo = res.data.path
+
+            if (form.photo) {
+                const recipe = await axios.post('/api/recipes', form);
+                router.push({ name: 'home' })
+            }
+        }
     } catch (error) {
         console.error('Error uploading recipe:', error);
     }
@@ -120,6 +134,6 @@ const createRecipe = async () => {
 
 onMounted(() => {
     categoriesStore.categoriesDataFetch();
-    console.log(props.recipe);
+    // console.log(props.recipe);
 });
 </script>

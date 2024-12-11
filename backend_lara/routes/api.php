@@ -23,7 +23,7 @@ Route::delete("recipes/{recipe}",[RecipeController::class,'destory']);
 Route::post('recipes',[RecipeController::class,'store']);
 
 // update recipe
-Route::patch('recipes/{recipe}',[RecipeController::class,'update']);
+Route::put('recipes/{recipe}',[RecipeController::class,'update']);
 
 // get categories
 Route::get('categories',[CategoryController::class,'index']);
