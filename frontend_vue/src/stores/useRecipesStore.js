@@ -11,12 +11,24 @@ export const useRecipesStore = defineStore('recipes', () => {
 
     const recipe = ref({});
 
+    const links = ref();
+
+    const prev_page_url = ref('');
+    const next_page_url = ref('');
+
+
+
+
     // all recipes
     const recipesDataFetch = async () => {
         try {
             const res = await axios.get('/api/recipes');
             recipes.value = res.data.recipes
-            isloading.value= false;
+            isloading.value = false;
+            links.value = res.data.recipes.links
+            prev_page_url.value= res.data.recipes.prev_page_url
+            next_page_url.value= res.data.recipes.next_page_url
+
         } catch (e) {
             console.log(e);
         }
@@ -38,10 +50,10 @@ export const useRecipesStore = defineStore('recipes', () => {
     }
 
     // single recipe
-    const recipeData =async (id)=>{
-        const {data} = await axios.get('api/recipes/'+id);
-        recipe.value=data.recipe
+    const recipeData = async (id) => {
+        const { data } = await axios.get('api/recipes/' + id);
+        recipe.value = data.recipe
     }
 
-    return { isloading,recipe,recipes, recipesDataFetch, recipesByCategory ,recipeData}
+    return { links, isloading, recipe, recipes, recipesDataFetch, recipesByCategory, recipeData ,prev_page_url,next_page_url }
 });
