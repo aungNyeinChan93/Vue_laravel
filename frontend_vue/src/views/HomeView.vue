@@ -17,23 +17,41 @@
     </div>
     <!-- recipes card section -->
     <section class="my-4 grid lg:grid-cols-4 gap-4">
-      <RecipeCard v-for="recipe in recipesStore.recipes.data" :key="recipe.id" :recipe="recipe" :id="recipe.id" />
+
+      <template v-if="!recipesStore.isloading">
+        <RecipeCard v-for="recipe in recipesStore.recipes.data" :key="recipe.id" :recipe="recipe" :id="recipe.id" />
+      </template>
+      <template v-else>
+        <div v-for="(v, index) in Array(12)" :key="index" class="animate-pulse">
+
+          <div class="aspect-square w-full rounded object-cover bg-slate-500"></div>
+
+          <div class="mt-3 bg-slate-500">
+            <h3 class="font-medium text-gray-900 group-hover:underline group-hover:underline-offset-4 bg-slate-500">
+
+            </h3>
+            <p class="mt-1 text-sm text-gray-500 bg-slate-500"></p>
+          </div>
+        </div>
+      </template>
     </section>
+
   </div>
 </template>
 
 <script setup>
 import RecipeCard from '@/components/RecipeCard.vue';
 import { useRecipesStore } from '@/stores/useRecipesStore';
-import { onMounted } from 'vue';
+import { onMounted, onUpdated, ref } from 'vue';
 import CategoriesTab from '@/components/CategoriesTab.vue';
 import { useCategoryStore } from '@/stores/useCategoryStore';
+
 const recipesStore = useRecipesStore();
 const categoriesStore = useCategoryStore();
 
-onMounted(()=>{
+
+onMounted(() => {
   recipesStore.recipesDataFetch();
-  // console.log(recipesStore.recipes);
   categoriesStore.categoriesDataFetch();
 });
 

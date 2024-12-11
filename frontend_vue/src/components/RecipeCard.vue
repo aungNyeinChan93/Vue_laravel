@@ -19,8 +19,7 @@
 export default {
     props:['id','recipe'],
     setup(props) {
-    // console.log(props.recipe.photo);
-        
+    // console.log(props.recipe.photo);   
     },
     
 }

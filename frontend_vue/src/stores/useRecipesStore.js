@@ -4,6 +4,9 @@ import { ref } from "vue";
 
 
 export const useRecipesStore = defineStore('recipes', () => {
+
+    const isloading = ref(true)
+
     const recipes = ref([]);
 
     const recipe = ref({});
@@ -13,6 +16,7 @@ export const useRecipesStore = defineStore('recipes', () => {
         try {
             const res = await axios.get('/api/recipes');
             recipes.value = res.data.recipes
+            isloading.value= false;
         } catch (e) {
             console.log(e);
         }
@@ -39,5 +43,5 @@ export const useRecipesStore = defineStore('recipes', () => {
         recipe.value=data.recipe
     }
 
-    return { recipe,recipes, recipesDataFetch, recipesByCategory ,recipeData}
+    return { isloading,recipe,recipes, recipesDataFetch, recipesByCategory ,recipeData}
 });
